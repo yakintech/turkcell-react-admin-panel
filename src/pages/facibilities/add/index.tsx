@@ -1,14 +1,23 @@
-import { Button, Stack, TextField } from '@mui/material'
+import { Autocomplete, Button, Select, Stack, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { CreateFacibilityRequest, CreateFacibilityResponse } from '../models/Facibility'
 import { baseService } from '../../../api/baseService'
+import { useQuery } from '@tanstack/react-query'
+import { getAllCitiesResponseModel } from '../models/City'
 
 function Add() {
 
   const [name, setname] = useState("")
   const [description, setdescription] = useState("")
   const [address, setaddress] = useState("")
-  const [city, setcity] = useState("")
+  const [cityId, setCityId] = useState("")
+
+  const { data } = useQuery({
+    queryKey: ["cities"],
+    queryFn: async () => {
+      return baseService.getAll<getAllCitiesResponseModel[]>("cities")
+    }
+  })
 
 
   const add = () => {
@@ -16,7 +25,7 @@ function Add() {
       name: name,
       description: description,
       address: address,
-      city: city
+      cityId: cityId
     }
 
     baseService.add<CreateFacibilityResponse>("/facibilities", newFacibility)
@@ -26,10 +35,19 @@ function Add() {
   }
 
   return <>
+    <h1>Add New Facibility</h1>
     <Stack spacing={2}>
       <Stack direction="row" gap={4}>
         <TextField fullWidth label="Name" value={name} onChange={(e) => setname(e.target.value)} />
-        <TextField fullWidth label="City" value={city} onChange={(e) => setcity(e.target.value)} />
+        <Autocomplete
+          fullWidth
+          options={data || []}
+          getOptionLabel={(option) => option.name}
+          onChange={(event, newValue) => {
+            setCityId(newValue ? newValue._id : "");
+          }}
+          renderInput={(params) => <TextField {...params} label="Select City" />}
+        />
       </Stack>
       <Stack direction="row" gap={4}>
         <TextField

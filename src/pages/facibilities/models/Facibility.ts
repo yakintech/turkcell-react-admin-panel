@@ -2,7 +2,7 @@ export interface CreateFacibilityRequest {
     name: string
     description: string
     address: string
-    city: string
+    cityId: string
 }
 
 export interface CreateFacibilityResponse {
@@ -10,3 +10,10 @@ export interface CreateFacibilityResponse {
 }
 
 
+export interface GetAllFacilitiesResponse {
+    _id: string
+    name: string
+    description: string
+    address: string
+    city: string
+}
