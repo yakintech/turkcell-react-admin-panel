@@ -1,9 +1,21 @@
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
+import { baseService } from '../../../api/baseService'
 
 function List() {
-  return (
-    <div>index</div>
-  )
+
+  const { data } = useQuery({
+    queryKey: ["facibilities"],
+    queryFn: async () => {
+      return baseService.getAll("/api/facibilities")
+    }
+  })
+
+  return <>
+
+      
+  
+  </>
 }
 
 export default List
