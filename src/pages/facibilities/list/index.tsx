@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { baseService } from '../../../api/baseService'
 import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid'
-import { GetAllFacilitiesResponse } from '../models/Facibility'
+import { GetAllFacibilitiesResponse } from '../models/Facibility'
 import { Button, Stack } from '@mui/material'
 import { queryClient } from '../../..'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +12,7 @@ function List() {
   const { data } = useQuery({
     queryKey: ["facibilities"],
     queryFn: async () => {
-      return baseService.getAll<GetAllFacilitiesResponse[]>("facibilities")
+      return baseService.getAll<GetAllFacibilitiesResponse[]>("facibilities")
     }
   })
 
@@ -44,7 +44,8 @@ function List() {
     {
       field: "name",
       headerName: "Name",
-      flex: 1
+      flex: 1,
+      renderCell: (params: any) => <>{params.row.name.toUpperCase()}</>
     },
     {
       field: "description",
@@ -59,7 +60,18 @@ function List() {
     {
       field: "city",
       headerName: "City",
-      flex: 1
+      flex: 1,
+      renderCell: (params: any) => {
+        return  <>{params.row.city?.name}</>
+      }
+    },
+    {
+      field:"Update",
+      headerName:"Update",
+      flex:1,
+      renderCell: (params: any) => {
+        return <Button onClick={() => navigate(`/facibilities/update/${params.row._id}`)} color="info" variant="contained">Update</Button>
+      }
     },
     {
       field: "delete",

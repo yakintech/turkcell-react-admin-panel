@@ -10,7 +10,7 @@ export const baseService = {
             throw error;
         }
     },
-    getById: async<T> (url: string, id: number) => {
+    getById: async<T> (url: string, id: string) => {
         try {
             let response = await axiosInstance.get<T>(`${url}/${id}`);
             return response.data;
