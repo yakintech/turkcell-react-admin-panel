@@ -7,7 +7,7 @@ function List() {
   const { data } = useQuery({
     queryKey: ["facibilities"],
     queryFn: async () => {
-      return baseService.getAll("/api/facibilities")
+      return baseService.getAll("facibilities")
     }
   })
 

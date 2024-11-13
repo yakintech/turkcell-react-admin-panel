@@ -1,5 +1,7 @@
 import { Button, Stack, TextField } from '@mui/material'
 import React, { useState } from 'react'
+import { CreateFacibilityRequest, CreateFacibilityResponse } from '../models/Facibility'
+import { baseService } from '../../../api/baseService'
 
 function Add() {
 
@@ -7,6 +9,21 @@ function Add() {
   const [description, setdescription] = useState("")
   const [address, setaddress] = useState("")
   const [city, setcity] = useState("")
+
+
+  const add = () => {
+    let newFacibility: CreateFacibilityRequest = {
+      name: name,
+      description: description,
+      address: address,
+      city: city
+    }
+
+    baseService.add<CreateFacibilityResponse>("/facibilities", newFacibility)
+      .then(res => {
+        console.log(res)
+      })
+  }
 
   return <>
     <Stack spacing={2}>
@@ -33,7 +50,7 @@ function Add() {
         />
       </Stack>
       <Stack alignItems="flex-end">
-        <Button sx={{ width: '20%' }} variant="contained">Add</Button>
+        <Button onClick={add} sx={{ width: '15%' }} variant="contained">Add</Button>
       </Stack>
     </Stack>
 
@@ -41,3 +58,4 @@ function Add() {
 }
 
 export default Add
+

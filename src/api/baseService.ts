@@ -21,7 +21,7 @@ export const baseService = {
     },
     add: async<T> (url: string, model: any) => {
         try {
-            let response = await axiosInstance.post(url, model);
+            let response = await axiosInstance.post<T>(url, model);
             return response.data;
         } catch (error) {
             console.log(`Base Service add error ${url}`, error);
