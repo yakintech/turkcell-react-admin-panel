@@ -10,6 +10,7 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import { baseService } from '../../api/baseService';
 import { AuthContext, AuthContextType } from '../../context/AuthContext';
+import { useDispatch } from 'react-redux';
 
 const Card = styled(MuiCard)(({ theme }) => ({
     display: 'flex',
@@ -57,6 +58,8 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
 
     const { login } = React.useContext(AuthContext) as AuthContextType
 
+    let dispacth = useDispatch()
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -72,6 +75,7 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
 
         baseService.add("/auth/login", { email, password }).then((response) => {
            login()
+           dispacth({type:"auth/login"})
 
         }
         ).catch((error) => {

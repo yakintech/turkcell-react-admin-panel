@@ -2,3 +2,7 @@ React UI Libraries
 
 https://mui.com/
 https://ant.design/
+
+
+Redux Chrome Ext
+https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
