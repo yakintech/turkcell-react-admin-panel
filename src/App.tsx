@@ -9,21 +9,25 @@ import { AuthContext, AuthContextType } from './context/AuthContext'
 
 function App() {
 
-  const { isLogin } = useContext(AuthContext) as AuthContextType
+  const { isLogin, loading } = useContext(AuthContext) as AuthContextType
 
   return <>
     {
-      isLogin ? <>
-        <Header />
-        <hr />
-        <Container sx={{ marginTop: 2 }}>
-          <Routes>
-            <Route path="/facibilities/*" element={<FacibilitiesRoutes />} />
-            <Route path='/match/*' element={<MatchRoutes />} />
-          </Routes>
-        </Container>
-      </>
-        : <Login />
+      loading ? <h1>loading...</h1> : (
+        isLogin ? (
+          <>
+            <Header />
+            <Container>
+              <Routes>
+                <Route path="/facilities/*" element={<FacibilitiesRoutes />} />
+                <Route path="/match/*" element={<MatchRoutes />} />
+              </Routes>
+            </Container>
+          </>
+        ) : (
+          <Login />
+        )
+      )
     }
   </>
 }
