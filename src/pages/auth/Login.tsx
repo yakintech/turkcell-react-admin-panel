@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
+import { baseService } from '../../api/baseService';
 
 const Card = styled(MuiCard)(({ theme }) => ({
     display: 'flex',
@@ -52,21 +53,28 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function Login(props: { disableCustomTheme?: boolean }) {
-    const [emailError, setEmailError] = React.useState(false);
-    const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
-    const [passwordError, setPasswordError] = React.useState(false);
-    const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        if (emailError || passwordError) {
-            event.preventDefault();
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+
+        const email = data.get('email') as string;
+        const password = data.get('password') as string;
+
+        //validation logic
+        if (!email || !password) {
+            alert('Please fill the form');
             return;
         }
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
+
+        baseService.add("/auth/login", { email, password }).then((response) => {
+            alert('Login Success');
+
+        }
+        ).catch((error) => {
+            alert('Login Failed');
         });
+
     };
     return <>
         <CssBaseline enableColorScheme />
@@ -93,8 +101,6 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
                 >
                     <FormControl>
                         <TextField
-                            error={emailError}
-                            helperText={emailErrorMessage}
                             id="email"
                             type="email"
                             name="email"
@@ -104,14 +110,11 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
                             required
                             fullWidth
                             variant="outlined"
-                            color={emailError ? 'error' : 'primary'}
                             sx={{ ariaLabel: 'email' }}
                         />
                     </FormControl>
                     <FormControl>
                         <TextField
-                            error={passwordError}
-                            helperText={passwordErrorMessage}
                             name="password"
                             placeholder="••••••"
                             type="password"
@@ -121,7 +124,6 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
                             required
                             fullWidth
                             variant="outlined"
-                            color={passwordError ? 'error' : 'primary'}
                         />
                     </FormControl>
                     <Button
