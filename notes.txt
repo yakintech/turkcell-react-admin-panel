@@ -6,3 +6,12 @@ https://ant.design/
 
 Redux Chrome Ext
 https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+
+Reactjs Form Libraries
+https://react-hook-form.com/
+https://formik.org/
+
+
+React i18 multi language library
+https://react.i18next.com/getting-started
+

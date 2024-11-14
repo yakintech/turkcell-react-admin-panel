@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthContextProvider } from './context/AuthContext';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import './utils/i18n';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
