@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import { baseService } from '../../api/baseService';
+import { AuthContext, AuthContextType } from '../../context/AuthContext';
 
 const Card = styled(MuiCard)(({ theme }) => ({
     display: 'flex',
@@ -54,6 +55,8 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 
 export default function Login(props: { disableCustomTheme?: boolean }) {
 
+    const { login } = React.useContext(AuthContext) as AuthContextType
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -68,7 +71,7 @@ export default function Login(props: { disableCustomTheme?: boolean }) {
         }
 
         baseService.add("/auth/login", { email, password }).then((response) => {
-            alert('Login Success');
+           login()
 
         }
         ).catch((error) => {

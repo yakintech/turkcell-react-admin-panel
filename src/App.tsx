@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import FacibilitiesRoutes from './pages/facibilities'
 import MatchRoutes from './pages/match'
 import Header from './components/layout-components/Header'
 import { Container } from '@mui/material'
 import Login from './pages/auth/Login'
+import { AuthContext, AuthContextType } from './context/AuthContext'
 
 function App() {
 
-  var isLogin = false
-
+  const { isLogin } = useContext(AuthContext) as AuthContextType
 
   return <>
     {
