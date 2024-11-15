@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getAllCitiesResponseModel } from '../models/City'
 import { useNavigate } from 'react-router-dom'
 import Form from '../components/form'
+import { queryClient } from '../../..'
 
 function Add() {
 
@@ -33,6 +34,10 @@ function Add() {
 
     baseService.add<CreateFacibilityResponse>("/facibilities", newFacibility)
       .then(res => {
+        //listelemedeki cache i boz.
+        queryClient.invalidateQueries({
+          queryKey: ["facibilities"]
+        })
         navigate("/facibilities")
       })
   }

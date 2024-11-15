@@ -1,9 +1,12 @@
 import React from 'react'
 
 function List() {
-  return (
-    <div>index</div>
-  )
+
+
+  return <>
+    <h1>List Page</h1>
+
+  </>
 }
 
 export default List

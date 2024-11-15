@@ -13,7 +13,8 @@ function List() {
     queryKey: ["facibilities"],
     queryFn: async () => {
       return baseService.getAll<GetAllFacibilitiesResponse[]>("facibilities")
-    }
+    },
+    staleTime: 1000 * 30 // front end cache
   })
 
   const navigate = useNavigate();

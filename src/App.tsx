@@ -9,6 +9,7 @@ import { AuthContext, AuthContextType } from './context/AuthContext'
 import { useDispatch, useSelector } from 'react-redux'
 import { checkLogin } from './store/slices/AuthSlice'
 import AdminUserRoutes from './pages/adminuser'
+import './App.css'
 
 
 function App() {
