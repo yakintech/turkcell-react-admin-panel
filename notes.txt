@@ -24,3 +24,5 @@ SASS
 https://www.w3schools.com/sass/
 https://sass-lang.com/
 
+https://tailwindcss.com/docs/installation
+
