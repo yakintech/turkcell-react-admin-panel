@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Title, Wrapper } from '../../../components/core-components/Header-Core'
+import Header from './Header'
+import AdminUsers from './AdminUsers'
+import { useQuery } from '@tanstack/react-query'
+import { baseService } from '../../../api/baseService'
 
 function List() {
 
 
-  return <>
-  <Wrapper>
-    <Title>List Page</Title>
-  </Wrapper>
-    <h1>List Page</h1>
 
+  const { data } = useQuery({
+    queryKey: ["adminusers"],
+    queryFn: async () => {
+      let response = await baseService.getAll('adminuser')
+      return response
+    }
+  })
+
+
+  return <>
+    <Header />
+    <AdminUsers data={data} />
   </>
 }
 

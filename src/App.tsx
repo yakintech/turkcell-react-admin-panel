@@ -10,9 +10,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { checkLogin } from './store/slices/AuthSlice'
 import AdminUserRoutes from './pages/adminuser'
 import './App.css'
+import Parent from './pages/callback/Parent'
 
 
 function App() {
+
 
   const { isLogin, loading } = useContext(AuthContext) as AuthContextType
   const { auth } = useSelector((state: any) => state)

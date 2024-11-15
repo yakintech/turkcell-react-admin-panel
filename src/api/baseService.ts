@@ -45,7 +45,7 @@ export const baseService = {
             throw error;
         }
     },
-    delete: async<T> (url: string, id: number) => {
+    delete: async<T> (url: string, id: any) => {
         try {
             let response = await axiosInstance.delete(`${url}/${id}`, {
                 withCredentials: true

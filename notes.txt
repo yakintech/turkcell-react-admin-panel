@@ -26,3 +26,13 @@ https://sass-lang.com/
 
 https://tailwindcss.com/docs/installation
 
+
+React Memorize
+
+
+
+Form Validations
+YUP
+https://github.com/jquense/yup
+ZOD
+https://zod.dev/
